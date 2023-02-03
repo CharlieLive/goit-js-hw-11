@@ -72,11 +72,11 @@ loadMoreButton.addEventListener('click', async e => {
 
 const showImages = images => {
   const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = '';
+//   gallery.innerHTML = '';
   images.forEach(image => {
     const div = document.createElement('div');
     div.classList.add('photo-card');
-    div.innerHTML = `<a href="${image.webformatURL}" class="card-image">
+    div.innerHTML = `<a href="" class="card-image">
                         <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy"/>
                       </a>
                       <div class="info">
