@@ -86,6 +86,9 @@ const showImages = images => {
                         <p class="info-item">
                           <b>Comments:</b> ${image.comments}
                         </p>
+                        <p class="info-item">
+                          <b>Downloads:</b> ${image.downloads}
+                        </p>
                       </div>`;
     gallery.appendChild(div);
   });
