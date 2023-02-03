@@ -1,8 +1,8 @@
 const axios = require('axios');
 const Notiflix = require('notiflix');
 require('notiflix/build/notiflix-aio');
-const SimpleLightbox = require('simplelightbox');
-require('simplelightbox/dist/simple-lightbox.min.css');
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const API_KEY = '33325052-337ffda9c2b7f27240b7b1171';
 const form = document.querySelector('#search-form');
@@ -45,7 +45,8 @@ form.addEventListener('submit', async event => {
   }
 });
 
-loadMoreButton.addEventListener('click', async () => {
+loadMoreButton.addEventListener('click', async e => {
+  e.preventDefault();
   const query = input.value;
   if (!query) {
     return;
@@ -75,7 +76,9 @@ const showImages = images => {
   images.forEach(image => {
     const div = document.createElement('div');
     div.classList.add('photo-card');
-    div.innerHTML = `<img src="${image.webformatURL}" alt="${image.tags}" loading="lazy"/>
+    div.innerHTML = `<a href="${image.webformatURL}" class="card-image">
+                        <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy"/>
+                      </a>
                       <div class="info">
                         <p class="info-item">
                           <b>Likes:</b> ${image.likes}
@@ -93,3 +96,11 @@ const showImages = images => {
     gallery.appendChild(div);
   });
 };
+
+let lightbox = new SimpleLightbox('.card-image a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+  captionPosition: 'bottom',
+});
+lightbox.on(`show.lightbox`);
+lightbox.refresh();
